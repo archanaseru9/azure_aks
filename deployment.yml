@@ -7,10 +7,10 @@ spec:
   selector:
     matchLabels:
       app: azure-vote
-template:
-  metadata:
-    labels:
-      app: azure-vote
+  template:
+    metadata:
+      labels:
+        app: azure-vote
   spec:
     containers:
     - name: azure-vote
