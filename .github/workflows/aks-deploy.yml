@@ -1,28 +1,28 @@
-name: Deploy to AKS ACR
-on:
-  workflow_run:
-    workflows: ["docker"]   # The name of the first workflow
-    types:
-      - completed 
+# name: Deploy to AKS ACR
+# on:
+#   workflow_run:
+#     workflows: ["docker"]   # The name of the first workflow
+#     types:
+#       - completed 
 
-jobs:
-  deploy:
-    runs-on: self-hosted
+# jobs:
+#   deploy:
+#     runs-on: self-hosted
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
-      - name: Log in to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+#       - name: Log in to Azure
+#         uses: azure/login@v1
+#         with:
+#           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Set up Kubernetes context
-        run: az aks get-credentials --resource-group MyResourceGroup --name MyAKSCluster --overwrite-existing
+#       - name: Set up Kubernetes context
+#         run: az aks get-credentials --resource-group MyResourceGroup --name MyAKSCluster --overwrite-existing
 
-      - name: Deploy to AKS
-        run: kubectl apply -f  ${{github.workspace}}/deployment.yml -n default
+#       - name: Deploy to AKS
+#         run: kubectl apply -f  ${{github.workspace}}/deployment.yml -n default
 
-      - name: Verify Deployment
-        run: kubectl get pods -n default
+#       - name: Verify Deployment
+#         run: kubectl get pods -n default
