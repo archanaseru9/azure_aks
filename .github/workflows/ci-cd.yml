@@ -18,11 +18,17 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Clone the azure-voting-app-redis repository
+        run: |
+          git clone https://github.com/Azure-Samples/azure-voting-app-redis.git
+          
+
       - name: Log in to ACR
         run: az acr login --name myacrarch
 
       - name: Build and push Docker image
         run: |
+          cd azure-voting-app-redis
           docker build -t myacrarch.azurecr.io/azure-vote:v${{ github.run_id }} .
           docker push myacrarch.azurecr.io/azure-vote:v${{ github.run_id }}
 
@@ -30,6 +36,17 @@ jobs:
         run: |
           # Replace the image tag in the deployment.yaml file with the tag from the build step
           sed -i 's|v{{ image_tag }}|v${{ github.run_id }}|' deployment.yaml
+
+
+      # - name: Set up Kubernetes context
+      #   run: az aks get-credentials --resource-group MyResourceGroup --name MyAKSCluster --overwrite-existing
+
+      # - name: Deploy to AKS
+      #   run: kubectl apply -f  ${{github.workspace}}/deployment.yml -n default
+
+      # - name: Verify Deployment
+      #   run: kubectl get pods -n default
+
 
       - name: Logout from Azure
         run: az logout
