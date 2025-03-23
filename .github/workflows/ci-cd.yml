@@ -35,13 +35,18 @@ jobs:
       - name: Replace image tag in deployment.yaml
         run: |
           cd ../../
-          ls -lrt
+          dir
           # Replace the image tag in the deployment.yaml file with the tag from the build step
           sed -i 's|v{{ image_tag }}|v${{ github.run_id }}|' deployment.yaml
 
   deploy:
     runs-on: "self-hosted"
     steps:
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Set up Kubernetes context
         run: az aks get-credentials --resource-group MyResourceGroup --name MyAKSCluster --overwrite-existing
 
