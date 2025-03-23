@@ -39,7 +39,7 @@ jobs:
           cd azure_aks
               
           # Replace the image tag in the deployment.yaml file with the tag from the build step
-          sed -i 's|v{{ image_tag }}|v${{ github.run_id }}|' deployment.yaml
+          sed -i 's|v{{ image_tag }}|v${{ github.run_id }}|' deployment.yml
 
   deploy:
     runs-on: "self-hosted"
