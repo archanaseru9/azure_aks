@@ -1,5 +1,4 @@
-name: Deploy to AKS
-
+name: Deploy to AKS ACR
 on:
   push:
     branches:
@@ -7,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
@@ -22,7 +21,7 @@ jobs:
         run: az aks get-credentials --resource-group MyResourceGroup --name MyAKSCluster --overwrite-existing
 
       - name: Deploy to AKS
-        run: kubectl apply -f $(System.DefaultWorkingDirectory)/deployment.yaml -n default
+        run: kubectl apply -f  ${{github.workspace}}/deployment.yaml -n default
 
       - name: Verify Deployment
         run: kubectl get pods -n default
