@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: azure-vote
-          image: myacrarch.azurecr.io/azure-vote:v${{ github.run_id }}
+          image: myacrarch.azurecr.io/azure-vote:v{{image_tag}}
           ports:
             - containerPort: 80
           resources:

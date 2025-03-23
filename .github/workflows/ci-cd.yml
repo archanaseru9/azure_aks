@@ -1,9 +1,9 @@
-name: Build and Push Docker Image to ACR
+name: docker
 
 on:
   push:
     branches:
-      - feature
+      - main
 
 jobs:
   build-and-push:
@@ -25,6 +25,11 @@ jobs:
         run: |
           docker build -t myacrarch.azurecr.io/azure-vote:v${{ github.run_id }} .
           docker push myacrarch.azurecr.io/azure-vote:v${{ github.run_id }}
+
+      - name: Replace image tag in deployment.yaml
+        run: |
+          # Replace the image tag in the deployment.yaml file with the tag from the build step
+          sed -i 's|v{{ image_tag }}|v${{ github.run_id }}|' deployment.yaml
 
       - name: Logout from Azure
         run: az logout

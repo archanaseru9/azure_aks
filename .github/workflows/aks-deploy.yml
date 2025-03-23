@@ -1,8 +1,9 @@
 name: Deploy to AKS ACR
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["docker"]   # The name of the first workflow
+    types:
+      - completed 
 
 jobs:
   deploy:
