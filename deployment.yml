@@ -11,9 +11,16 @@ spec:
     metadata:
       labels:
         app: azure-vote
-  spec:
-    containers:
-    - name: azure-vote
-      image: myacrarch.azurecr.io/azure-vote:v${{ github.run_id }}
-      ports:
-        - containerPort: 80
+    spec:
+      containers:
+        - name: azure-vote
+          image: myacrarch.azurecr.io/azure-vote:v${{ github.run_id }}
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
