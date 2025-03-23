@@ -21,7 +21,7 @@ jobs:
         run: az aks get-credentials --resource-group MyResourceGroup --name MyAKSCluster --overwrite-existing
 
       - name: Deploy to AKS
-        run: kubectl apply -f  ${{github.workspace}}/deployment.yaml -n default
+        run: kubectl apply -f  ${{github.workspace}}/deployment.yml -n default
 
       - name: Verify Deployment
         run: kubectl get pods -n default
