@@ -35,8 +35,10 @@ jobs:
       - name: Replace image tag in deployment.yaml
         run: |
           cd ../
-          
-          dir          
+          dir 
+          cd azure-aks 
+          dir   
+              
           # Replace the image tag in the deployment.yaml file with the tag from the build step
           sed -i 's|v{{ image_tag }}|v${{ github.run_id }}|' deployment.yaml
 
