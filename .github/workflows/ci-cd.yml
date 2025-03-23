@@ -34,13 +34,14 @@ jobs:
 
       - name: Replace image tag in deployment.yaml
         run: |
-          cd ../azure-aks
+          cd ../
           dir          
           # Replace the image tag in the deployment.yaml file with the tag from the build step
           sed -i 's|v{{ image_tag }}|v${{ github.run_id }}|' deployment.yaml
 
   deploy:
     runs-on: "self-hosted"
+    needs: build-and-push 
     steps:
       - name: Log in to Azure
         uses: azure/login@v1
