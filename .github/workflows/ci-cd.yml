@@ -55,19 +55,19 @@ jobs:
       - name: Set up Kubernetes context
         run: az aks get-credentials --resource-group MyResourceGroup --name MyAKSCluster --overwrite-existing
 
-      - name: Check if Deployment Exists
-        id: check_deployment
-        shell: bash
-        run: |
-          if kubectl get deployment azure-vote -n default > /dev/null 2>&1; then
-            echo "EXISTS=true" >> $GITHUB_ENV
-          else
-            echo "EXISTS=false" >> $GITHUB_ENV
-          fi
+      # - name: Check if Deployment Exists
+      #   id: check_deployment
+      #   shell: bash
+      #   run: |
+      #     if kubectl get deployment azure-vote -n default > /dev/null 2>&1; then
+      #       echo "EXISTS=true" >> $GITHUB_ENV
+      #     else
+      #       echo "EXISTS=false" >> $GITHUB_ENV
+      #     fi
 
-      - name: Delete Existing Deployment 
-        if: env.EXISTS == 'true'
-        run: kubectl delete deployment azure-vote -n default
+      # - name: Delete Existing Deployment 
+      #   if: env.EXISTS == 'true'
+      #   run: kubectl delete deployment azure-vote -n default
 
       - name: Deploy to AKS
         run: kubectl apply -f  ${{github.workspace}}/deployment_use.yml -n default
