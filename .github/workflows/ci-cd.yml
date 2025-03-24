@@ -72,8 +72,7 @@ jobs:
       - name: Deploy to AKS
         run: kubectl apply -f  ${{github.workspace}}/deployment_bit.yml -n default
 
-      
-
+    
       - name: Verify Deployment
         run: kubectl get pods -n default
 
