@@ -55,9 +55,6 @@ jobs:
       - name: Set up Kubernetes context
         run: az aks get-credentials --resource-group MyResourceGroup --name MyAKSCluster --overwrite-existing
 
-      - name: delete depployment
-        run: kubectl delete deployment azure-vote -n default
-
       - name: Check if Deployment Exists
         id: check_deployment
         run: |
