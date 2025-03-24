@@ -17,6 +17,9 @@ spec:
           image: myacrarch.azurecr.io/azure-vote:v{{image_tag}}
           ports:
             - containerPort: 80
+          env:
+            - name: REDIS
+              value: "azure-vote-back"
           resources:
             requests:
               memory: "64Mi"
@@ -24,6 +27,4 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
-            env:
-            - name: REDIS
-              value: "azure-vote-back"
+          
