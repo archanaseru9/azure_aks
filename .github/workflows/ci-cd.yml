@@ -29,8 +29,8 @@ jobs:
       - name: Build and push Docker image
         run: |
           cd azure-voting-app-redis/azure-vote
-          docker build -t myacrarch.azurecr.io/azure-vote:v${{ github.run_id }} .
-          docker push myacrarch.azurecr.io/azure-vote:v${{ github.run_id }}
+          docker build -t myacrarch.azurecr.io/azure-vote:v${{github.run_id}} .
+          docker push myacrarch.azurecr.io/azure-vote:v${{github.run_id}}
 
       - name: Replace image tag in deployment.yaml
         run: |
@@ -39,7 +39,7 @@ jobs:
           cd azure_aks
               
           # Replace the image tag in the deployment.yaml file with the tag from the build step
-          sed -i 's|v{{ image_tag }}|v${{ github.run_id }}|' deployment.yml
+          sed -i 's|v{{image_tag}}|v${{github.run_id}}|' deployment.yml
 
   deploy:
     runs-on: "self-hosted"
