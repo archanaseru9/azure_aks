@@ -57,6 +57,7 @@ jobs:
 
       - name: Check if Deployment Exists
         id: check_deployment
+        shell: bash
         run: |
           if kubectl get deployment azure-vote -n default > /dev/null 2>&1; then
             echo "EXISTS=true" >> $GITHUB_ENV
@@ -64,7 +65,7 @@ jobs:
             echo "EXISTS=false" >> $GITHUB_ENV
           fi
 
-      - name: Delete Existing Deployment (if it exists)
+      - name: Delete Existing Deployment 
         if: env.EXISTS == 'true'
         run: kubectl delete deployment azure-vote -n default
 
