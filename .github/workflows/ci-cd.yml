@@ -22,7 +22,6 @@ jobs:
         run: |
           git clone https://github.com/Azure-Samples/azure-voting-app-redis.git
           
-
       - name: Log in to ACR
         run: az acr login --name myacrarch
 
