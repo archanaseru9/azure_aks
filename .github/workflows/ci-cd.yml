@@ -16,7 +16,6 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-
       - name: Clone the azure-voting-app-redis repository
         run: |
           git clone https://github.com/Azure-Samples/azure-voting-app-redis.git
