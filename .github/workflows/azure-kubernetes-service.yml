@@ -31,7 +31,8 @@ name: Build and deploy an app to AKS
 on:
   workflow_dispatch:
   push:
-    branches: ["feature"]
+    branches: 
+      - feature
 
 
 env:
@@ -43,7 +44,7 @@ env:
 
 jobs:
   buildImage:
-    runs-on: self-host
+    runs-on: self-hosted
     steps:
       # Checks out the repository this file is in
       - uses: actions/checkout@v4
